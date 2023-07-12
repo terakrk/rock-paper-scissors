@@ -1,7 +1,32 @@
 "use strict";
-let playerGuess = prompt("Rock, paper or scissors?");
-const playerSelection = playerGuess.toLowerCase();
 
+const playerSelection = prompt("Rock, paper or scissors?").toLowerCase();
+
+function playRound(playerSelection, computerSelection) {
+   
+   switch (true) {
+       case playerSelection == "rock" && computerSelection == "scissors":
+             return "Rock beats scissors! You win!";
+   
+       case playerSelection == "paper" && computerSelection == "rock":
+             return "Paper beats rock! You win!";
+   
+       case playerSelection == "scissors" && computerSelection == "paper":
+               return "Scissors beats paper! You win!";
+   
+       case playerSelection == "rock" && computerSelection == "paper":
+             return "Paper beats rock! You lose!";
+   
+       case playerSelection == "paper" && computerSelection == "scissors":
+             return "Scissors beats paper! You lose!";
+   
+       case playerSelection == "scissors" && computerSelection == "rock":
+               return "Rock beats scissors! You lose!";
+       default:
+                  return "It's a tie!";
+           }
+          
+   }
 let computerSelection = getComputerChoice();
 switch (computerSelection)  {
     case 1:
@@ -22,34 +47,38 @@ function getComputerChoice(min, max) {
     return Math.floor(Math.random() * (max) + min);
 }
 
-function playRound(playerSelection, computerSelection) {
-   switch (true) {
-    case playerSelection == "rock" && computerSelection == "scissors":
-          return "Rock beats scissors! You win!";
 
-    case playerSelection == "paper" && computerSelection == "rock":
-          return "Paper beats rock! You win!";
-
-    case playerSelection == "scissors" && computerSelection == "paper":
-            return "Scissors beats paper! You win!";
-
-    case playerSelection == "rock" && computerSelection == "paper":
-          return "Paper beats rock! You lose!";
-
-    case playerSelection == "paper" && computerSelection == "scissors":
-          return "Scissors beats paper! You lose!";
-
-    case playerSelection == "scissors" && computerSelection == "rock":
-            return "Rock beats scissors! You lose!";
-    default:
-               return "It's a tie!";
-        }
-       
-}
 
 let result = playRound(playerSelection, computerSelection);
 
-console.log(`Player Selection: ${playerSelection}; Computer Selection: ${computerSelection}. ${result}`);
+alert(`Player Selection: ${playerSelection}; Computer Selection: ${computerSelection}. ${result}`);
+
+function winner() {
+    let playerWin = 0;
+    let computerWin = 0;
+    let tie = 0;
+    if (result.includes("You win!")) {
+        playerWin++;
+    } else if (result.includes("You lose!")) {
+        computerWin++;
+        } else {
+            tie++;
+        }
+
+        switch (true) {
+            case (playerWin > computerWin) && (playerWin > tie):
+                return "Congratulations! You win!";
+            case (computerWin > playerWin) && (computerWin > tie):
+                return "Sorry! I win!";
+                case playerWin == computerWin:
+                    return "It's a tie!";
+        }
+    }
+
+
+console.log(winner());
+
+
 
 
 
