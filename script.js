@@ -1,10 +1,10 @@
 "use strict";
 
-const playerSelection = prompt("Rock, paper or scissors?").toLowerCase();
+
 
 function playRound(playerSelection, computerSelection) {
-   
-   switch (true) {
+
+    switch (true) {
        case playerSelection == "rock" && computerSelection == "scissors":
              return "Rock beats scissors! You win!";
    
@@ -25,21 +25,14 @@ function playRound(playerSelection, computerSelection) {
        default:
                   return "It's a tie!";
            }
-          
+
+                
    }
+
+   let playerSelection = prompt('Rock, paper or scissors?').toLowerCase();
 let computerSelection = getComputerChoice();
-switch (computerSelection)  {
-    case 1:
-    computerSelection = "rock";
-    break;
-    case 2:
-        computerSelection = "paper";
-        break;
-    case 3:
-        computerSelection = "scissors";
-        break;
-        
-}
+   
+
 
 function getComputerChoice(min, max) {
     min = 1;
@@ -47,39 +40,53 @@ function getComputerChoice(min, max) {
     return Math.floor(Math.random() * (max) + min);
 }
 
+switch (computerSelection)  {
+    case 1:
+    computerSelection = "rock";
+    break;
+    case 2:
+     computerSelection = "paper";
+     break;
+    case 3:
+        computerSelection == "scissors";
+        break;
+        
+}
+
+let roundResult = playRound(playerSelection, computerSelection); 
+alert(`Player choice: ${playerSelection}; Computer choice: ${computerSelection}.${roundResult}`);
 
 
-let result = playRound(playerSelection, computerSelection);
+let playerScore = 0;
+let computerScore = 0;
+let tie = 0;
 
-alert(`Player Selection: ${playerSelection}; Computer Selection: ${computerSelection}. ${result}`);
+   
 
-function winner() {
-    let playerWin = 0;
-    let computerWin = 0;
-    let tie = 0;
-    if (result.includes("You win!")) {
-        playerWin++;
-    } else if (result.includes("You lose!")) {
-        computerWin++;
+function game() {
+    for (let i = 0; i < 5; i++) {
+        let playerSelection = prompt('Rock, paper or scissors?').toLowerCase();
+let computerSelection = getComputerChoice();
+        playRound(playerSelection, computerSelection);
+    }
+
+    if (roundResult.includes("You win!")) {
+        playerScore++;
+    } else if (roundResult.includes("You lose!")) {
+        computerScore++;
         } else {
             tie++;
         }
-
-        switch (true) {
-            case (playerWin > computerWin) && (playerWin > tie):
-                return "Congratulations! You win!";
-            case (computerWin > playerWin) && (computerWin > tie):
-                return "Sorry! I win!";
-                case playerWin == computerWin:
-                    return "It's a tie!";
-        }
+}
+    switch (true) {
+        case (playerScore > computerScore) && (playerScore > tie):
+            alert("Congratulations! You win!");
+        case (computerScore > playerScore) && (computerScore > tie):
+             alert("Sorry! I win!");
+            case playerScore == computerScore:
+                alert("It's a tie!");
     }
 
 
-console.log(winner());
 
-
-
-
-
-
+game();
