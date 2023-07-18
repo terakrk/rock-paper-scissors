@@ -1,4 +1,11 @@
 "use strict";
+let computerScore = 0;
+let playerScore = 0;
+let tie = 0;
+let outcome = "";
+let finalScore = "";
+
+game();
 
 function getPlayerChoice() {
     let playerSelection = prompt('Rock, paper or scissors?').toLowerCase();
@@ -23,52 +30,33 @@ function game() {
         let computerSelection = getComputerChoice();
         let playerSelection = getPlayerChoice();
         let outcome = playRound(playerSelection, computerSelection);
-        let playerScore = 0;
-        let computerScore = 0;
-        let tie = 0;
-        playRound();
-        if (outcome.includes("You win!")) {
-            playerScore++;
-        } else if (outcome.includes("You lose!")) {
-            computerScore++;
-        } else {
-            tie++;
-    } 
-
-console.log(`Player: ${playerSelection}; Computer: ${computerSelection}. ${outcome} `);
-    }
-
-    switch(true) {
-        case (playerScore > computerScore) && (playerScore > tie):
-            return "Congratulations! You win!";
-        case (playerScore < computerScore) && (computerScore > tie):
-            return "Sorry! You lose!";
-        case (tie < playerScore) && (tie < computerScore):
-            return "It's a tie!";
-    }
-}   
-
+        console.log(`Player: ${playerSelection}, Computer: ${computerSelection} ${outcome}`);
+}
+if ((playerScore > computerScore) && (playerScore >= tie)) {
+    finalScore = "Congratulations! You win!";
+} else if ((playerScore < computerScore) && (computerScore >= tie)) {
+    finalScore = "Sorry! I win!";
+} else {
+    finalScore = "We both won!";
+}
+    alert(finalScore);
+}
 
 function playRound(playerSelection, computerSelection) {
-    
-    if ((playerSelection == 'rock') && (computerSelection == 'scissors')) {
-       return "You win! Rock beats scissors!";
-    } else if ((playerSelection == 'paper') && (computerSelection == 'rock')) {
-        return "You win! Paper beats rock!";
-    } else if ((playerSelection == 'scissors') && (computerSelection == 'paper')) {
-       return "You win! Scissors beats paper!";
-    } else if ((playerSelection == 'rock' && computerSelection == 'paper')) {
-        return "You lose! Paper beats rock!";
-    } else if ((playerSelection == 'paper') && (computerSelection == 'scissors')) {
-       return "You lose! Scissors beats paper!";
-    } else if ((playerSelection == 'scissors') && (computerSelection == 'rock')) {
-        return "You lose! Rock beats scissors!";
+    //* winning rounds *//
+    if ((playerSelection == 'rock') && (computerSelection == 'scissors') || ((playerSelection == 'paper') && (computerSelection == 'rock')) || ((playerSelection == 'scissors') && (computerSelection == 'paper'))) {
+        playerScore++;
+       return (`You win! ${playerSelection} beats ${computerSelection}!`);
+    } else if ((playerSelection == 'rock' && computerSelection == 'paper') || (playerSelection == 'paper') && (computerSelection == 'scissors') || (playerSelection == 'scissors') && (computerSelection == 'rock')) {
+        computerScore++;
+        return `You lose! ${computerSelection} beats ${playerSelection}!`;
     }  else {
+        tie++;
         return "It's a tie!";
     }
-   }
+}
 
-    
-    
-   
-game();
+
+
+
+
