@@ -29,13 +29,15 @@ function getComputerChoice() {
         let playerSelection = getPlayerChoice();
         let computerSelection = getComputerChoice();
 
-
+function getWinner() {
 if ((playerScore > computerScore) && (playerScore >= tie)) {
     finalScore = "Congratulations! You win!";
 } else if ((playerScore < computerScore) && (computerScore >= tie)) {
     finalScore = "Sorry! I win!";
 } else {
     finalScore = "We both won!";
+}
+console.log(finalScore)
 }
 
 
