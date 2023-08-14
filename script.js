@@ -3,12 +3,15 @@ let computerScore = 0;
 let playerScore = 0;
 let tie = 0;
 let finalScore = "";
+let playerSelection = getPlayerChoice();
+let computerSelection = getComputerChoice();
+
 
 function getPlayerChoice(){
 const weapons = document.querySelectorAll('.weapons');
     weapons.forEach(weapon =>{
         weapon.addEventListener('click', function() {
-            let playerSelection = weapon.id; playRound(playerSelection, computerSelection);
+            playerSelection = weapon.id; playRound(playerSelection, computerSelection);
         });
     });
 }
@@ -26,8 +29,7 @@ function getComputerChoice() {
             
     }
 }
-        let playerSelection = getPlayerChoice();
-        let computerSelection = getComputerChoice();
+    
 
 function getWinner() {
 if ((playerScore > computerScore) && (playerScore >= tie)) {
@@ -41,19 +43,24 @@ console.log(finalScore)
 }
 
 
-function playRound(playerSelection, computerSelection) {
+function playRound(playerSelection) {
+    const computerSelection = getComputerChoice();
     //* winning rounds *//
     if ((playerSelection === 'rock') && (computerSelection === 'scissors') || ((playerSelection === 'paper') && (computerSelection === 'rock')) || ((playerSelection === 'scissors') && (computerSelection === 'paper'))) {
-        playerScore++;
+        ++playerScore;
        console.log(`You win! ${playerSelection} beats ${computerSelection}!`);
     } else if ((playerSelection === 'rock' && computerSelection === 'paper') || (playerSelection === 'paper') && (computerSelection === 'scissors') || (playerSelection === 'scissors') && (computerSelection === 'rock')) {
-        computerScore++;
+        ++computerScore;
         console.log(`You lose! ${computerSelection} beats ${playerSelection}!`);
     }  else {
-        tie++;
         console.log("It's a tie!");
     }
+
+
 }
+
+
+
 
 
 
