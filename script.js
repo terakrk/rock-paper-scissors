@@ -39,7 +39,7 @@ if ((playerScore === 5) && (playerScore > computerScore)) {
 } 
 
 console.log(finalScore);
-resetGame();
+endGame();
 }
 
 
@@ -66,10 +66,31 @@ function playRound(playerSelection) {
 
 }
 
+function endGame() {
+    const weapons = document.querySelectorAll(".weapons");
+    weapons.forEach((weapon) => {
+        weapon.classList.add("hidden");
+    const reset = document.querySelector("#reset");
+    reset.classList.remove("hidden");
+    reset.addEventListener('click', resetGame);
+    
+    });
+};
+
 function resetGame() {
+    const weapons = document.querySelectorAll(".weapons");
+    weapons.forEach((weapon) => {
+        weapon.classList.remove("hidden");
+    const reset = document.querySelector("#reset");
+    reset.classList.add("hidden");
+    
+   
+    });
+ 
     playerScore = 0;
     computerScore = 0;
-}
+};
+
 
 
 
