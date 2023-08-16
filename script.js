@@ -5,6 +5,11 @@ let tie = 0;
 let finalScore = "";
 let playerSelection = getPlayerChoice();
 let computerSelection = getComputerChoice();
+const result = document.querySelector('.result');
+const pScore = document.querySelector('.player-score');
+const compScore = document.querySelector('.computer-score');
+const tieScore = document.querySelector('.tie-score');
+const fScore = document.querySelector('.final-score');
 
 
 function getPlayerChoice(){
@@ -38,7 +43,7 @@ if ((playerScore === 5) && (playerScore > computerScore)) {
     finalScore = "Sorry! I win!";
 } 
 
-console.log(finalScore);
+fScore.textContent = finalScore;
 endGame();
 }
 
@@ -48,14 +53,15 @@ function playRound(playerSelection) {
     //* winning rounds *//
     if ((playerSelection === 'rock') && (computerSelection === 'scissors') || ((playerSelection === 'paper') && (computerSelection === 'rock')) || ((playerSelection === 'scissors') && (computerSelection === 'paper'))) {
         ++playerScore;
-       console.log(`You win! ${playerSelection} beats ${computerSelection}!`);
-       console.log(`Player score: ${playerScore}. Computer score: ${computerScore}.`);
+
+       result.textContent = `You win! ${playerSelection} beats ${computerSelection}!`;
+       
     } else if ((playerSelection === 'rock' && computerSelection === 'paper') || (playerSelection === 'paper') && (computerSelection === 'scissors') || (playerSelection === 'scissors') && (computerSelection === 'rock')) {
         ++computerScore;
-        console.log(`You lose! ${computerSelection} beats ${playerSelection}!`);
-        console.log(`Player score: ${playerScore}. Computer score: ${computerScore}.`);
+        result.textContent = `You lose! ${computerSelection} beats ${playerSelection}!`;
     }  else {
-        console.log("It's a tie!");
+        ++tie;
+        result.textContent = "It's a tie!";
     }
 
     if ((playerScore === 5) || (computerScore === 5)) {
@@ -63,6 +69,10 @@ function playRound(playerSelection) {
     } else {
     
     }
+
+    pScore.textContent = `Player score: ${playerScore}`;
+    compScore.textContent = `Computer score: ${computerScore}`;
+    tieScore.textContent = `Tie score: ${tie}`;
 
 }
 
@@ -73,22 +83,26 @@ function endGame() {
     const reset = document.querySelector("#reset");
     reset.classList.remove("hidden");
     reset.addEventListener('click', resetGame);
-    
     });
 };
 
 function resetGame() {
+    playerScore = 0;
+    computerScore = 0;
+    tie = 0;
+    finalScore = '';
+  
+    pScore.textContent = `Player score: ${playerScore}`;
+    compScore.textContent = `Computer score: ${computerScore}`;
+    tieScore.textContent = `Tie score: ${tie}.`;
+    fScore.textContent = finalScore;
+    result.textContent = '';
     const weapons = document.querySelectorAll(".weapons");
     weapons.forEach((weapon) => {
         weapon.classList.remove("hidden");
     const reset = document.querySelector("#reset");
     reset.classList.add("hidden");
-    
-   
     });
- 
-    playerScore = 0;
-    computerScore = 0;
 };
 
 
